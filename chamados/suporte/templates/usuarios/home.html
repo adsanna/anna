@@ -1,0 +1,87 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+{% load static %}
+
+<div class="container" style="text-align: center;">
+    <h1><br>Meus Chamados</h1>
+
+    <div class="mb-3">
+
+    <form method="get">
+<br>
+        <div class="box-amarela">
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Pesquisar..."
+                class="input-pesquisa"
+            >
+
+            <span class="label-filtrar">FILTRAR:</span>
+
+            <select name="data">
+                <option value="">Data</option>
+                <option value="recentes">Mais recentes</option>
+                <option value="antigos">Mais antigos</option>
+            </select>
+
+            <select name="status">
+                <option value="">Status</option>
+                <option value="aberto">Aberto</option>
+                <option value="fechado">Fechado</option>
+            </select>
+
+            <label class="checkbox-salvar-filtros">
+                <input type="checkbox" name="salvar_filtros">
+                Salvar filtros
+            </label>
+
+            <button type="submit" class="btn-pesquisar">
+                Pesquisar
+            </button>
+
+    <a class="btn-novo" href="{% url 'novo_chamado' %}">
+        + Abrir novo chamado
+    </a>
+</form>
+</div>
+
+
+    <div class="container-chamados mt-4">
+      <table class="table table-bordered table-striped">
+        <br>
+        <tr>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Departamento</th>
+            <th>Usuário</th>
+            <th>Data de Criação</th>
+            <th>Arquivo</th>
+            <th>Status</th>
+        </tr>
+        {% for documento in documentos %}
+        <tr>
+            <td>{{ documento.titulo }}</td>
+            <td>{{ documento.descricao }}</td>
+            <td>{{ documento.departamento }}</td>
+            <td>{{ documento.usuario.username }}</td>
+            <td>{{ documento.data_de_criacao|date:"d/m/Y H:i" }}</td>
+            <td>{{ documento.status }}</td>
+            <td>
+                {% if documento.arquivo %}
+                    <a href="{{ documento.arquivo.url }}" target="_blank">Abrir</a>
+                {% else %}
+                    Sem arquivo
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Nenhum documento cadastrado.</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+{% load static %}
+
+<div class="container my-5">
+
+    <div style="border:3px solid #ffc107; padding:37px; border-radius:35px;">
+
+        <div style="border:3px solid #ffc107; padding:15px; border-radius:20px; margin-bottom:20px;">
+            <a href="{% url 'home' %}" class="btn btn-danger">
+                HISTÓRICO DE CHAMADOS
+            </a>
+        </div>
+
+        <div style="border:3px solid #ffc107; padding:25px; border-radius:25px;">
+
+            <h5 style="color:orange; margin-bottom:20px;">
+                ABRIR UM NOVO CHAMADO:
+            </h5>
+
+            <form action="{% url 'novo_chamado' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row mb-4">
+
+                    <div class="col-md-6">
+                        <div style="border:3px solid #ffc107; padding:20px; border-radius:20px;">
+                            <label>Título</label>
+                            <input name="titulo" class="form-control" type="text">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div style="border:3px solid #ffc107; padding:20px; border-radius:20px;">
+                            <label>Departamento</label>
+                            <input name="departamento" class="form-control" type="text">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-4">
+                    <div style="border:3px solid #ffc107; padding:20px; border-radius:20px;">
+                        <label>Descrição</label>
+                        <textarea name="descricao" class="form-control" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div style="border:3px solid #ffc107; padding:20px; border-radius:20px;">
+                        <label>Inserir anexo</label>
+                        <input name="arquivo" class="form-control" type="file">
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <div style="border:3px solid #ffc107; padding:12px; border-radius:15px; display:inline-block;">
+                        <button class="btn btn-danger">
+                            ENVIAR
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
