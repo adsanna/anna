@@ -1,0 +1,105 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+{% load static %}
+
+<div class="container my-4">
+
+  <div class="box-geral">
+
+    <div class="box-titulo">
+      <h3 style="color:red; font-weight:bold; margin:0;">
+        AQUI ESTÃO TODOS OS CHAMADOS ATIVOS!
+      </h3>
+    </div>
+
+    <form method="get">
+      <div class="box-amarela" style="width: 100%; justify-content: space-between; gap: 15px;">
+
+        <input
+          type="text"
+          name="q"
+          placeholder="Pesquisar..."
+          class="input-pesquisa"
+          value="{{ request.GET.q }}"
+          style="flex:1; width: 100%;"
+        >
+
+        <button type="submit" class="btn-pesquisar">
+          PESQUISAR
+        </button>
+
+        <span class="label-filtrar" style="font-weight:bold;">FILTRAR:</span>
+
+        <select name="data">
+          <option value="">DATA</option>
+          <option value="recentes" {% if request.GET.data == "recentes" %}selected{% endif %}>Mais recentes</option>
+          <option value="antigos" {% if request.GET.data == "antigos" %}selected{% endif %}>Mais antigos</option>
+        </select>
+
+        <select name="status">
+          <option value="">STATUS</option>
+          <option value="aberto" {% if request.GET.status == "aberto" %}selected{% endif %}>Em aberto</option>
+          <option value="em andamento" {% if request.GET.status == "em andamento" %}selected{% endif %}>Em andamento</option>
+          <option value="concluído" {% if request.GET.status == "concluído" %}selected{% endif %}>Concluído</option>
+        </select>
+
+        <label class="checkbox-salvar-filtros">
+          <input type="checkbox" name="salvar_filtros" {% if request.GET.salvar_filtros %}checked{% endif %}>
+          SALVAR FILTROS
+        </label>
+
+      </div>
+    </form>
+
+    <div class="d-flex justify-content-end mt-3">
+      <details style="text-align:right;">
+        <summary style="cursor:pointer; color:orange; font-weight:bold;">
+          CHAMADOS ENCERRADOS
+        </summary>
+
+        <div class="mt-2 box-chamados">
+          {% for documento in documentos %}
+            {% if documento.status == "concluído" %}
+              <div style="border:2px solid black; border-radius:12px; padding:12px; margin-bottom:10px;">
+                <a href="{% url 'admin_detalhe_chamado' documento.pk %}" style="text-decoration:none; color:orange; font-weight:bold;">
+                  CHAMADO ID: {{ documento.pk }}
+                </a>
+              </div>
+            {% endif %}
+          {% empty %}
+            <div style="border:2px solid black; border-radius:12px; padding:12px;">
+              Nenhum chamado encerrado.
+            </div>
+          {% endfor %}
+        </div>
+      </details>
+    </div>
+
+    <div class="mt-3">
+      {% for documento in documentos %}
+        {% if documento.status != "concluído" %}
+          <div style="border:2px solid black; border-radius:12px; padding:16px; margin-bottom:15px;">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+              <div style="color:orange; font-weight:bold; font-size:18px;">
+                CHAMADO ID: {{ documento.pk }}
+              </div>
+
+              <div>
+                <a class="btn btn-danger btn-sm" href="{% url 'admin_detalhe_chamado' documento.pk %}">
+                  VER CHAMADO
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% empty %}
+        <div style="border:2px solid black; border-radius:12px; padding:16px;">
+          Nenhum chamado ativo.
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

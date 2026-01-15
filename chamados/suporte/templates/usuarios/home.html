@@ -28,9 +28,12 @@
 
             <select name="status">
                 <option value="">Status</option>
-                <option value="aberto">Aberto</option>
-                <option value="fechado">Fechado</option>
+                <option value="aberto">Em aberto</option>
+                <option value="em andamento">Em andamento</option>
+                <option value="concluído">Concluído</option>
             </select>
+
+
 
             <label class="checkbox-salvar-filtros">
                 <input type="checkbox" name="salvar_filtros">
@@ -67,7 +70,6 @@
             <td>{{ documento.departamento }}</td>
             <td>{{ documento.usuario.username }}</td>
             <td>{{ documento.data_de_criacao|date:"d/m/Y H:i" }}</td>
-            <td>{{ documento.status }}</td>
             <td>
                 {% if documento.arquivo %}
                     <a href="{{ documento.arquivo.url }}" target="_blank">Abrir</a>
@@ -75,6 +77,7 @@
                     Sem arquivo
                 {% endif %}
             </td>
+            <td>{{ documento.get_status_display }}</td>
         </tr>
         {% empty %}
         <tr>

@@ -91,7 +91,7 @@
 .box-geral {
     border: 2px solid black;
     border-radius: 20px;
-    padding: 25px;
+    padding: 200px;
 }
 
 .box-titulo {
@@ -131,6 +131,12 @@
 
 .box-botao {
     text-align: right;
+}
+
+
+.box-chamados {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 

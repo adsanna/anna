@@ -18,8 +18,12 @@
 <nav class="navbar navbar-dark bg-warning">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="#">
-     <img src="{% static 'suporte/logo.png' %}" alt="Logo" style="height: 50px; width: auto; object-fit: contain;">
+     <img src="{% static 'logo.png' %}" alt="Logo" style="height: 50px; width: auto; object-fit: contain;">
     </a>
+    <div class="ms-auto">
+    <a class="btn btn-dark btn-sm" href="{% url 'admin_chamados' %}">Admin</a>
+  </div>
+
     <div class="ms-auto me-auto">
       <span class="navbar-text mb-0 h6">
         <a style="text-decoration: none; color: red;" href="{% url 'home' %}">
