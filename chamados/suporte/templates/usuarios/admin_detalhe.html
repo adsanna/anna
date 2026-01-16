@@ -2,9 +2,7 @@
 {% block conteudo %}
 {% load static %}
 
-<div class="container my-5">
-
-  <div class="box-geral">
+<div class="container-fluid my-5"></div>
 
     <div class="box-titulo">
       <h2 style="color:red; font-weight:bold; margin:0;">
@@ -47,7 +45,7 @@
 
       <div class="box-campo">
         <label style="color:orange; font-weight:bold;">
-          INSERIR ANEXO (Formato de arquivo aceito: JPEG JPG PNG EXCEL PDF WORD CSV):
+          INSERIR ANEXO (Formato de arquivo aceito: JPEG; JPG; PNG; EXCEL; PDF; WORD; CSV):
         </label>
 
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-2">
@@ -61,9 +59,6 @@
             {% endif %}
           </div>
 
-          <a class="btn btn-dark btn-sm" href="{% url 'admin_chamados' %}">
-            VOLTAR
-          </a>
         </div>
       </div>
 
@@ -84,8 +79,9 @@
           <button class="btn btn-danger btn-sm" type="submit">
             SALVAR
           </button>
-        </div>
-
+          <a class="btn btn-dark btn-sm" href="{% url 'admin_chamados' %}">
+            VOLTAR
+          </a>
       </form>
 
     </div>
